@@ -90,13 +90,7 @@ export default class Signup extends Component {
         };
 
         axios
-          .post(`https://localhost:3000/api/signup`, { user }, {
-              headers: {
-                  'Content-Type': 'application/json',
-                  Accept: 'application/json'
-              },
-              body: JSON.stringify(user)
-          })
+          .post(`https://localhost:5000/api/signup`, { user })
           .then(res => {
               console.log(res);
               console.log(res.data);
