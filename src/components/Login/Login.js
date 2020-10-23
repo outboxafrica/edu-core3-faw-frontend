@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
@@ -10,15 +10,13 @@ const defaultState = {
   passwordError: ""
 }
 
-const isLoggedIn = '';
-
 export default class Login extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
           defaultState,
-          isLoggedIn: true
+          isLoggedIn: false
         };
     
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,35 +64,25 @@ export default class Login extends Component {
             // clear form
             this.setState(defaultState);
         }
-        
-        const { email, password } = this.state;
-    
+
+        const user = {
+          email: this.state.email,
+          password: this.state.password
+        };
+
         axios
-          .post(
-            `https://localhost:3000/api/login`,
-            {
-              user: {
-                email: email,
-                password: password
-              }
-            },
-            { withCredentials: true }
-          )
-          .then(response => {
-            if (response.data.logged_in) {
-              this.props.handleSuccessfulAuth(response.data);
-            }
-            // if (!isLoggedIn()) { 
-            //   return <Redirect to="/signup" />;
-            // }
+          .post(`https://localhost:5000/api/login`, { user })
+          .then(res => {
+              console.log(res);
+              console.log(res.data);
           })
           .catch(err => {
-            console.log(err);
+                console.log(err);
           });
-        event.preventDefault();
       }
 
     render() {
+      const isLoggedIn = this.state.isLoggedIn;
         return (
             <div className="login-container">
               <form className="login-form" onSubmit={this.handleSubmit}>
@@ -144,6 +132,8 @@ export default class Login extends Component {
                             Sign up</Link>
                         </Router>
                     </span>
+                    {!isLoggedIn ? <Redirect to="/login" /> :
+                    <Redirect to="/" />}
                 </form>
             </div>
         )
