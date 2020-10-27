@@ -15,7 +15,7 @@ function Tions() {
   return (
     <div className='vip'>
          {!isLoading ? <div><h4>Getting answers...!!!</h4>
-         <img style={{width:"200px",height:"200px"}} src="img/loader.gif" /></div> : state.map(b=>{
+         <img style={{width:"200px",height:"200px"}} src="img/loader.gif" alt="spinner" /></div> : state.map(b=>{
            return <ol><li>{b.description}</li></ol>
           })
         } 
