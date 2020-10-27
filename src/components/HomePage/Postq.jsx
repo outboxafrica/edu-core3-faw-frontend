@@ -1,7 +1,9 @@
 import React, {useState} from "react";
-import './Post.css'
+import "./Post.css";
+
 function Postq() {
-  const[question , setQuestion] =  useState("")
+  const[question, setQuestion] =  useState('')
+
   const handleChange = (e)=> {
     setQuestion(e.target.value)
   }
@@ -13,15 +15,18 @@ function Postq() {
       body: JSON.stringify({description: question})
     })
       .then((res) => res.json())
-      .then((data) => alert("Question is posted"))
+      .then((data) =>{ 
+        alert(data.message);
+        setQuestion("")
+      })
   };
   return (
     <div className="fk">
-      <h2>Your Question</h2>
+      <h2>Your Questions</h2>
       <form onSubmit={questions}>
-      <textarea class="field" text="text" onChange={handleChange} ></textarea>
+      <textarea className="field" text="text" value={question}  onChange={handleChange} ></textarea>
       <div className="wag">
-        <button className="wat" type='submit'>Post Question</button>
+        <button className="wat" type="submit">Post Question</button>
       </div>
       </form>
     </div>

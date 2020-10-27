@@ -15,13 +15,16 @@ function Post() {
       body: JSON.stringify({description: answers})
     })
       .then((res) => res.json())
-      .then((data) => alert(data.message))
+      .then((data) =>{ 
+        alert(data.message);
+        setAnswer("")
+      })
   };
   return (
     <div className="fk">
       <h2>Your Answer</h2>
       <form onSubmit={answer}>
-      <textarea class="field" text="text"  onChange={handleChange} ></textarea>
+      <textarea className="field" text="text" value={answers}  onChange={handleChange} ></textarea>
       <div className="wag">
         <button className="wat" type="submit">Post Answer</button>
       </div>
