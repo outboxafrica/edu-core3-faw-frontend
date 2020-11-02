@@ -16,7 +16,7 @@ function Qions() {
     <div className='vip'>
          {!isLoading ? <div><h4>Getting questions...!!!</h4>
          <img style={{width:"200px",height:"200px"}} src="img/loader.gif" alt="spinner" /></div> : state.map(b=>{
-           return <ol><li>{b.description}</li></ol>
+           return <ol key={b._id}><li>{b.description}<button className="hat" >Answer</button></li></ol>
           })
         } 
         <button onClick={People}>View All Questions</button>
